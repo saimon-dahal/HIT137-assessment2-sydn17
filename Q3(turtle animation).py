@@ -1,6 +1,5 @@
 import turtle
 
-
 lamim = turtle.Turtle()
 # To change the starting position and pen color
 lamim.penup()
@@ -43,9 +42,16 @@ def check_input(value):
 edge_number = check_input("Enter the number of sides: ")
 side_length = check_input("Enter the side length: ")
 rec_depth = check_input("Enter the recursion depth: ")
-print (edge_number)
+# print (edge_number)
 poly_angle = int(360/edge_number)
 
 int_polygon(edge_number, side_length, poly_angle, rec_depth)
 
 turtle.done()
+
+
+
+#References
+#https://www.youtube.com/watch?v=pxKu2pQ7ILo  [Date: 04-01-2026]
+#https://docs.python.org/3.3/library/turtle.html. [Date: 04-01-2026]
+#https://www.w3schools.com/python/ref_module_turtle.asp. [Date: 04-01-2026]
