@@ -2,10 +2,14 @@ import turtle
 
 
 lamim = turtle.Turtle()
-count = 0
+# To change the starting position and pen color
+lamim.penup()
+lamim.goto(-200,-200)
+lamim.pencolor("red")
+lamim.pendown()
+
+#To make the design as given in the task
 def rec_func(length, depth):
-    global count
-    count = count+1
     if(depth == 0):
         lamim.forward(length)
         return
@@ -18,7 +22,8 @@ def rec_func(length, depth):
     lamim.left(60)
     rec_func(segment, depth - 1)
 
-def int_polygon(edge_number, side_length, poly_angle, rec_depth):
+# Initial polygon for the design
+def int_polygon(edge_number, side_length, poly_angle, rec_depth): 
     if(edge_number == 0):
         return
     rec_func(side_length,rec_depth)
@@ -26,27 +31,21 @@ def int_polygon(edge_number, side_length, poly_angle, rec_depth):
     edge_number = edge_number-1
     int_polygon(edge_number, side_length, poly_angle, rec_depth)
 
-edge_number = int(input("Enter the number of sides:"))
-side_length = int(input("Enter the side length: "))
-rec_depth = int(input("Enter the recursion depth: "))
+# To check the value is int and it will keep asking input.
+def check_input(value):
+    input_data = input(value)
+    if input_data.isdigit():
+        return int(input_data)
+    else:
+        print("*** Please use a valid integer ***")
+        return check_input(value)
+
+edge_number = check_input("Enter the number of sides: ")
+side_length = check_input("Enter the side length: ")
+rec_depth = check_input("Enter the recursion depth: ")
+print (edge_number)
 poly_angle = int(360/edge_number)
 
 int_polygon(edge_number, side_length, poly_angle, rec_depth)
-    
-print(count)
-
-# lamim.color('red', 'yellow')  # pen color, fill color
-# lamim.begin_fill()
-# x,y = lamim.pos()
-
-# while True:
-#     lamim.forward(edge_size)
-#     lamim.left(edge_angle)
-#     if (abs(lamim.pos()))< 1:  # pos() gives the current (x, y) position
-#         break
-# # lamim.done()
-# lamim.end_fill()
-
-
 
 turtle.done()
