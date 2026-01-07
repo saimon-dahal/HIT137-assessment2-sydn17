@@ -53,7 +53,7 @@ seasonal_avrg= (
 #save to a text file
 with open ("average_temp.txt", "w") as f:
   for season in ["Summer", "Autumn", "Winter", "Spring"]:
-    f.write(f"{season}:{seasonal_avrg[season]:.1f}°C\n")
+    f.write(f"{season}: {seasonal_avrg[season]:.1f}°C\n")
 
 #calculate temperature statistics
 station_stats= (
@@ -71,9 +71,23 @@ largest_range= station_stats[station_stats["range"] ==max_range]
 with open ("largest_temp_range_station.txt", "w") as f:
   for station, row in largest_range.iterrows():
     f.write(
-      f"{station}: Range{row['range']:.1f}°C"
+      f"{station}: Range {row['range']:.1f}°C"
       f"(Max: {row['max']:.1f}°C, Min: {row['min']:.1f}°C\n"
     )
-                                      
 
+#identify most stable and variable stations using standard deviation
+min_std= station_stats["std"].min()
+max_std= station_stats["std"].max()
+
+most_stable= station_stats[station_stats["std"] == min_std]
+most_variable= station_stats[station_stats["std"] == max_std]
+
+#save the result
+with open ("temperature_stability_stations.txt", "w") as f:
+  for station, row in most_stable.iterrows():
+    f.write(f"Most stable: {station}: StdDev {row['std']:.1f}°C\n")
+  for station, row in most_variable.iterrows():
+    f.write(f"Most variable: {station}: StdDev {row['std']:.1f}°C\n")
+
+print("Analysis complete")
   
