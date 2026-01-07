@@ -55,11 +55,25 @@ with open ("average_temp.txt", "w") as f:
   for season in ["Summer", "Autumn", "Winter", "Spring"]:
     f.write(f"{season}:{seasonal_avrg[season]:.1f}°C\n")
 
+#calculate temperature statistics
 station_stats= (
   data_long.dropna(subset=["Temperature"])
   .groupby("STATION_NAME")["Temperature"]
   .agg(["min", "max", "std"])
 )
+#calculaate temperature range
 station_stats["range"]= station_stats["max"] - station_stats["min"]
+#find station with largest range
+max_range= station_stats["range"].max()
+largest_range= station_stats[station_stats["range"] ==max_range]
 
+#save to text file
+with open ("largest_temp_range_station.txt", "w") as f:
+  for station, row in largest_range.iterrows():
+    f.write(
+      f"{station}: Range{row['range']:.1f}°C"
+      f"(Max: {row['max']:.1f}°C, Min: {row['min']:.1f}°C\n"
+    )
+                                      
 
+  
