@@ -43,4 +43,19 @@ def get_season(month):
     return "Spring"
 #apply season classification to each row
 data_long["Season"]= data_long["Month"].apply(get_season)
-  
+
+#calculate average temperature for each season
+seasonal_avrg= (
+  data_long.dropna(subset=["Temperature"])
+  .groupby("Season")["Temperature"]
+  .mean()
+)
+#save to a text file
+with open ("average_temp.txt", "w") as f:
+  for season in ["Summer", "Autumn", "Winter", "Spring"]:
+    f.write(f"{season}:{seasonal_avrg[season]:.1f}°C\n")
+
+
+
+
+
