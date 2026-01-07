@@ -72,7 +72,7 @@ with open ("largest_temp_range_station.txt", "w") as f:
   for station, row in largest_range.iterrows():
     f.write(
       f"{station}: Range {row['range']:.1f}°C"
-      f"(Max: {row['max']:.1f}°C, Min: {row['min']:.1f}°C\n"
+      f"(Max: {row['max']:.1f}°C, Min: {row['min']:.1f}°C)\n"
     )
 
 #identify most stable and variable stations using standard deviation
