@@ -55,7 +55,11 @@ with open ("average_temp.txt", "w") as f:
   for season in ["Summer", "Autumn", "Winter", "Spring"]:
     f.write(f"{season}:{seasonal_avrg[season]:.1f}°C\n")
 
-
-
+station_stats= (
+  data_long.dropna(subset=["Temperature"])
+  .groupby("STATION_NAME")["Temperature"]
+  .agg(["min", "max", "std"])
+)
+station_stats["range"]= station_stats["max"] - station_stats["min"]
 
 
