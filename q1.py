@@ -51,3 +51,31 @@ def main():
 
 main()
 
+def decrypt_character (character, shift1, shift2):
+    a = ord('a')
+    A = ord('A')
+
+if character.islower():
+    position = ord(character) - a
+    if character <= 'm':
+        position -= shift1 * shift2         # reverse of forward shift
+    else:
+        position += shift1 + shift2         # reverse of backward shift
+    position = position % 26
+    shifted_character = chr(A + position)
+
+    else:
+        shifted_character = character
+    return shifted_character
+def decrypt_file(shift1, shift2):
+    with open("encrypted_text.txt","r") as f:
+        file_contents = f.read()
+
+    decrypted = ""
+
+for character in file_contents:
+    decrypted += decrypt_character(character, shift1, shift2)
+
+with open("decrypted_text.txt","w") as f:
+    f.write(decrypted)
+
