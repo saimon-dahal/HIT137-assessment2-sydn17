@@ -79,3 +79,16 @@ for character in file_contents:
 with open("decrypted_text.txt","w") as f:
     f.write(decrypted)
 
+def verify_decryption():
+    with open("raw_text.txt", "r") as f1:
+        original = f1.read()
+
+    with open("decrypted_text.txt", "r") as f2:
+        decrypted = f2.read()
+
+    if original == decrypted:
+        print("Decryption is Succesfull")
+    else:
+        print("Decryption failed")
+        
+
