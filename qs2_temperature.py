@@ -6,9 +6,8 @@ import glob
 
 files= glob.glob("temperatures/*.csv")
 
-all_data= []
-
 # read each csv file and store
+all_data= []
 for file in files:
   df= pd.read_csv(file)
   all_data.append(df)
@@ -22,13 +21,13 @@ months= [
 
 #convert wide format to long format
 data_long= data.melt(
-  id_vars= ["STATION_NAME"],  #station name fixed
-  value_vars= months,  #cnvert month columns
-  var_name= "Month",  #column for month names
-  value_name= "Temperature"  #column for temperature values
+  id_vars= ["STATION_NAME"],
+  value_vars= months,
+  var_name= "Month",
+  value_name= "Temperature"
 )
 #convrt temperature value to numeric
-data_long["Temperature"]=pd.to_numeric(
+data_long["Temperature"] = pd.to_numeric(
   data_long["Temperature"], errors="coerce"
 )
 #function to map months to Australian season
@@ -45,7 +44,7 @@ def get_season(month):
 data_long["Season"]= data_long["Month"].apply(get_season)
 
 #calculate average temperature for each season
-seasonal_avrg= (
+seasonal_avg= (
   data_long.dropna(subset=["Temperature"])
   .groupby("Season")["Temperature"]
   .mean()
@@ -53,7 +52,7 @@ seasonal_avrg= (
 #save to a text file
 with open ("average_temp.txt", "w") as f:
   for season in ["Summer", "Autumn", "Winter", "Spring"]:
-    f.write(f"{season}: {seasonal_avrg[season]:.1f}°C\n")
+    f.write(f"{season}: {seasonal_avg[season]:.1f}°C\n")
 
 #calculate temperature statistics
 station_stats= (
