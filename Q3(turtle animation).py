@@ -14,7 +14,7 @@ def rec_func(length, depth):
     if(depth == 0):
         lamim.forward(length)
         return
-    segment = length / 4
+    segment = length / 3
     rec_func(segment, depth - 1)
     lamim.left(60)
     rec_func(segment, depth - 1)
