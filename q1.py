@@ -117,11 +117,19 @@ def verify_decryption():
         print("Decryption is succesfull")
     else:
         print("Decryption failed")
-        
+
+# To check the value is int and it will keep asking input.
+def check_input(value):
+    input_data = input(value)
+    if input_data.isdigit():
+        return int(input_data)
+    else:
+        print("*** Please use a valid integer ***")
+        return check_input(value)      
 
 def main():
-    shift1 = int(input("Enter shift1: "))
-    shift2 = int(input("Enter shift2: "))
+    shift1 = check_input("Enter shift1: ")
+    shift2 = check_input("Enter shift2: ")
 
     encrypt_file(shift1=shift1, shift2=shift2)
     decrypt_file(shift1=shift1, shift2=shift2)
