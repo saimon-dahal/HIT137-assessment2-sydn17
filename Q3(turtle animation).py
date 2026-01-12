@@ -1,11 +1,13 @@
 import turtle
 
+# Setup screen
+screen = turtle.Screen()
+screen.setup(width=600, height=600)
+
+
 lamim = turtle.Turtle()
-# To change the starting position and pen color
-lamim.penup()
-lamim.goto(-200,-200)
+lamim.speed(0)
 lamim.pencolor("red")
-lamim.pendown()
 
 #To make the design as given in the task
 def rec_func(length, depth):
@@ -42,11 +44,22 @@ def check_input(value):
 edge_number = check_input("Enter the number of sides: ")
 side_length = check_input("Enter the side length: ")
 rec_depth = check_input("Enter the recursion depth: ")
+
 # print (edge_number)
 poly_angle = int(360/edge_number)
 
+offset_x = -side_length / 2
+offset_y = -side_length / 2
+
+# To change the starting position and pen color
+lamim.penup()
+lamim.goto(offset_x, offset_y)
+lamim.setheading(0)
+lamim.pendown()
+
 int_polygon(edge_number, side_length, poly_angle, rec_depth)
 
+lamim.hideturtle()
 turtle.done()
 
 
