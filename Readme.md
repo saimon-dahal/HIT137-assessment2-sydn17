@@ -93,4 +93,5 @@ Most variable: WAGGA-WAGGA-AMO: StdDev 6.9°C
 ---
 
 ## Question 3
+![Question 3 Output](https://github.com/saimon-dahal/HIT137-assessment2-sydn17/blob/1a0b590536de832029d0ce8a3581f59bd6574dc4/question3_solution.png)
 
